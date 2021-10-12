@@ -14,3 +14,41 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hello', function () {
+    echo "Hello World";
+});
+
+//Route::get('/name/{nrp}/{name}', function ($nrp, $nama) {
+//    if (is_numeric($nrp) && ctype_alpha($nama)){
+//        return $nrp . " - " . $nama;
+//    }
+    //echo "Hello " $nrp ." - ". $name . "!";
+//});
+
+Route::get('/data/{data?}', function ($data = "Kosong") {
+    echo "Isi parameter = " . $data;
+});
+
+Route::get('/name/{nrp}/{name}', function ($nrp, $nama) {
+    return $nrp . " - " . $nama;
+    
+})->where (['name' => '[A-Za-z]+', 'nrp' => '[0-9]+']);
+
+
+Route::get('/name/{nrp}/{name}/{bilangan}', function ($nrp, $nama, $bilangan) {
+    if($bilangan %2 == 0){
+        return $bilangan . " adalah bilangan genap." . $nrp . " - " . $nama;
+    }else{
+        return $bilangan . " adalah bilangan ganjil." . "(" . $nrp . " - " . $nama . ")";
+        return $nrp . " - " . $nama;
+    }
+    return $nrp . " - " . $nama;
+    
+})->where (['name' => '[A-Za-z]+', 'nrp' => '[0-9]+']);
+
+Route::get('/deretbilangan/{bilangan}', function ($bilangan) {
+    for ($i=0; $i <= $bilangan; $i++){
+        echo $i;
+    }
+});
