@@ -52,3 +52,7 @@ Route::get('/deretbilangan/{bilangan}', function ($bilangan) {
         echo $i;
     }
 });
+
+Route::get('/person', 'PersonController@index');
+Route::get('/person/show/{param}', 'PersonController@show');
+Route::resource('/student', 'StudentController');
