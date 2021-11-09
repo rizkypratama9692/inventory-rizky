@@ -6,6 +6,32 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    private $code = "190813007";
+    private $name = "Mohamad Rizky";
+    private $course;
+    private $task;
+    private $quiz;
+    private $mid_term;
+    private $final;
+    private $grade;
+
+    public function myCourse ($course, $task, $quiz, $mid_term, $final) {
+        $code = $this->code;
+        $name = $this->name;
+        $this->course = $course;
+        $this->task = $task;
+        $this->quiz = $quiz;
+        $this->mid_term = $mid_term;
+        $this->final = $final;
+        $grade = $this -> calculateGrade($task, $quiz, $mid_term, $final);
+
+        return view(student/myView,['code'=>this->code, 'name'=>this->name, 'course'=>this->course, 'task'=>this->task, 
+        'quiz'=>this->quiz, 'mid_term'=>this->mid_term, 'final'=>this->final, 'grade'=>this->grade, 'code'=>this->code])
+    }
+
+    private function calculateGrade () {
+
+    }
     /**
      * Display a listing of the resource.
      *

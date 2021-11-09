@@ -56,3 +56,8 @@ Route::get('/deretbilangan/{bilangan}', function ($bilangan) {
 Route::get('/person', 'PersonController@index');
 Route::get('/person/show/{param}', 'PersonController@show');
 Route::resource('/student', 'StudentController');
+
+Route::get('/homepage', function () {
+    return view('home', ["name" => "Rizky"]);
+});
+Route::get('/sendData', 'PersonController@sendData');
