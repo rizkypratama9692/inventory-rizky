@@ -16,22 +16,24 @@ class StudentController extends Controller
     private $grade;
 
     public function myCourse ($course, $task, $quiz, $mid_term, $final) {
-        $code = $this->code;
-        $name = $this->name;
         $this->course = $course;
         $this->task = $task;
         $this->quiz = $quiz;
         $this->mid_term = $mid_term;
         $this->final = $final;
-        $grade = $this -> calculateGrade($task, $quiz, $mid_term, $final);
+        $this->course = $course;
 
-        return view(student/myView,['code'=>this->code, 'name'=>this->name, 'course'=>this->course, 'task'=>this->task, 
-        'quiz'=>this->quiz, 'mid_term'=>this->mid_term, 'final'=>this->final, 'grade'=>this->grade, 'code'=>this->code])
+        $grade = $this -> calculateGrade();
+
+        return view('student/myView',['code'=>$this->code, 'name'=>$this->name, 'course'=>$this->course, 'task'=>$this->task, 
+        'quiz'=>$this->quiz, 'mid_term'=>$this->mid_term, 'final'=>$this->final, 'grade'=>$this->grade]);
     }
 
     private function calculateGrade () {
-
+        $nilai_akhir = ($this->task*0.1)+($this->quiz*0.1)+($this->mid_term*0.3)+($this->final*0.5);
+        return $nilai_akhir;
     }
+
     /**
      * Display a listing of the resource.
      *
