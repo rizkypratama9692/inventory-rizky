@@ -4,18 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
-{
+class StudentController extends Controller{
     private $code = "190813007";
     private $name = "Mohamad Rizky";
-    private $course;
-    private $task;
-    private $quiz;
-    private $mid_term;
-    private $final;
-    private $grade;
+    private $course, $task, $quiz, $mid_term, $final, $grade;
 
     public function myCourse ($course, $task, $quiz, $mid_term, $final) {
+        
         $this->course = $course;
         $this->task = $task;
         $this->quiz = $quiz;

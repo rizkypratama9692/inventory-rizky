@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.app');
 });
 
 Route::get('/hello', function () {
@@ -60,5 +60,5 @@ Route::resource('/student', 'StudentController');
 Route::get('/homepage', function () {
     return view('home', ["name" => "Rizky"]);
 });
-Route::get('/sendData', 'PersonController@sendData');
-Route::get('/Nilai/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class, 'myCourse']);
+Route::get('person/sendData', 'PersonController@sendData');
+Route::get('/student/myacademic/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class,'myCourse']);
