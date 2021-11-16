@@ -61,3 +61,4 @@ Route::get('/homepage', function () {
     return view('home', ["name" => "Rizky"]);
 });
 Route::get('/sendData', 'PersonController@sendData');
+Route::get('/Nilai/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class, 'myCourse']);
