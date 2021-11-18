@@ -12,53 +12,86 @@
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('welcome');
 });
-
 Route::get('/hello', function () {
-    echo "Hello World";
+    return "Hello World";
 });
-
-//Route::get('/name/{nrp}/{name}', function ($nrp, $nama) {
-//    if (is_numeric($nrp) && ctype_alpha($nama)){
-//        return $nrp . " - " . $nama;
-//    }
-    //echo "Hello " $nrp ." - ". $name . "!";
-//});
-
-Route::get('/data/{data?}', function ($data = "Kosong") {
-    echo "Isi parameter = " . $data;
+Route::get('/name/{name}', function ($name) {
+    return "Hello {$name}";
 });
+// Route::get('/data/{data?}', function ($data = "Kosong") {
+//     return "Isi parameter = {$data}";
+// });
+Route::get('/name/{name}', function ($name) {
+    return "Nama = {$name}";
+})->where('name', '[A-Za-z]+');
+// studi kasus
+// Route::get('/{NRP}&{Nama}', function ($NRP, $Nama) {
+//     if(is_numeric($NRP) && ctype_alpha($Nama)){
+//         return "NRP = {$NRP}, Nama = {$Nama}";
+//     }elseif(is_numeric($NRP) && !ctype_alpha($Nama)){
+//         return "NRP = {$NRP} dan Nama bukan alphabet";
+//     }elseif(!is_numeric($NRP) && ctype_alpha($Nama)){
+//         return "NRP bukan angka dan Nama = {$Nama}";
+//     }else{
+//         return "NRP bukan angka dan nama bukan alphabet";
+//     }
+// });
+Route::get('/{NRP}&{Nama}', function ($NRP, $Nama) {
+    return "NRP = {$NRP}, Nama = {$Nama}";
 
-Route::get('/name/{nrp}/{name}', function ($nrp, $nama) {
-    return $nrp . " - " . $nama;
-    
-})->where (['name' => '[A-Za-z]+', 'nrp' => '[0-9]+']);
+})-> where(['name' => '[A-Za-z]+', 'NRP' => '[0-9]+'
+]);;
 
-
-Route::get('/name/{nrp}/{name}/{bilangan}', function ($nrp, $nama, $bilangan) {
+Route::get('/cekbilangan/{bilangan}', function ($bilangan) {
     if($bilangan %2 == 0){
-        return $bilangan . " adalah bilangan genap." . $nrp . " - " . $nama;
+        return "{$bilangan} merupakan genap";
     }else{
-        return $bilangan . " adalah bilangan ganjil." . "(" . $nrp . " - " . $nama . ")";
-        return $nrp . " - " . $nama;
+        return "{$bilangan} merupakan ganjil";
     }
-    return $nrp . " - " . $nama;
-    
-})->where (['name' => '[A-Za-z]+', 'nrp' => '[0-9]+']);
-
+});
 Route::get('/deretbilangan/{bilangan}', function ($bilangan) {
-    for ($i=0; $i <= $bilangan; $i++){
-        echo $i;
+    for ($i = 0; $i <= $bilangan; $i++){
+        if($i % 2 == 0){
+            echo "{$i} genap";
+            echo "</br>";
+        }else{
+            echo "{$i} ganjil";
+            echo "</br>";
+        }
+    }
+});
+Route::get('/logika/{awal}&{akhir}', function ($awal, $akhir) {
+    if($awal > $akhir){
+        return "Data Awal Tidak Boleh Lebih Besar";
+    }else{
+        $angka_awal = $awal;
+        $angka_sebelumnya = 0;
+        echo "{$angka_awal}";
+        echo "<br/>";
+        while($angka_sebelumnya <= $akhir){
+            $angka_sekarang = $angka_awal + $angka_sebelumnya;
+            echo "{$angka_sekarang}";
+            echo "<br/>";
+
+            $angka_sebelumnya = $angka_sekarang;
+        }
     }
 });
 
 Route::get('/person', 'PersonController@index');
+Route::get('/person/send-data', 'PersonController@sendData');
 Route::get('/person/show/{param}', 'PersonController@show');
-Route::resource('/student', 'StudentController');
-
+// Route::resource('/student', 'StudentController');
 Route::get('/homepage', function () {
-    return view('home', ["name" => "Rizky"]);
+    return view('home', ['name' => "Fatah At Thariq"]);
 });
-Route::get('person/sendData', 'PersonController@sendData');
-Route::get('/student/myacademic/{course}/{task}/{quiz}/{mid_term}/{final}', [StudentController::class,'myCourse']);
+Route::get('/person/data', 'PersonController@data');
+Route::get('/student/my-academic/{course}/{task}/{quiz}/{mid_term}/{final}', 'StudentController@myCourse');
+// Route::get('/person', function () {
+//     return view('/layouts/app');
+// });
+Route::get('/person/add', 'PersonController@add');
+Route::post('/person/addProcess', 'PersonController@addProcess');
+

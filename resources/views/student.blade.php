@@ -1,8 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
-    <h1>Index Person</h1>
-@stop
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,5 +7,6 @@
     <title>Document</title>
 </head>
 <body>
+    
 </body>
 </html>
